@@ -22,7 +22,7 @@ var MATCHES = [
         a: {
             runs: 85, wickets: 2, overs: "8",
             players: [
-                { name: "AJMAL", runs: 50, wickets: 1 },
+                { name: "AJMAL", runs: 10, wickets: 1 },
                 { name: "MIDLAJ", runs: 20, wickets: 1 },
                 { name: "HASBULLA", runs: 15, wickets: 1 }
             ]
@@ -35,7 +35,7 @@ var MATCHES = [
                 { name: "ASJAL", runs: 9, wickets: 0 }
             ]
         },
-        result: "FIGHTERS KAROTHINGAL won by 7 wickets"
+        result: "FIGHTERS KAROTHINGAL WON by 7 wickets"
     },
 
     // ----- MATCH 2 TEMPLATE -----

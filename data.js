@@ -35,7 +35,7 @@ var MATCHES = [
                 { name: "ASJAL", runs: 9, wickets: 0 }
             ]
         },
-        result: "FIGHTERS KAROTHINGAL WON by 7 wickets"
+        result: "Test FIGHTERS KAROTHINGAL WON by 7 wickets"
     },
 
     // ----- MATCH 2 TEMPLATE -----

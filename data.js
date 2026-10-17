@@ -38,63 +38,35 @@ var MATCHES = [
         result: "FIGHTERS KAROTHINGAL won by 7 wickets"
     },
 
-    // ----- MATCH 2 TEMPLATE -----
-    // {
-    //     no: 2,
-    //     date: "19 Oct 2026",
-    //     ground: "HSS Mecherikkunnu",
-    //     a: {
-    //         runs: 0, wickets: 0, overs: "0",
-    //         players: [
-    //             { name: "AJMAL", runs: 0, wickets: 0 },
-    //             { name: "MIDLAJ", runs: 0, wickets: 0 },
-    //             { name: "HASBULLA", runs: 0, wickets: 0 },
-    //             { name: "SHALU", runs: 0, wickets: 0 },
-    //             { name: "SADIQ", runs: 0, wickets: 0 }
-    //         ]
-    //     },
-    //     b: {
-    //         runs: 0, wickets: 0, overs: "0",
-    //         players: [
-    //             { name: "SHUHAIB", runs: 0, wickets: 0 },
-    //             { name: "ASJAL", runs: 0, wickets: 0 },
-    //             { name: "HIBATHULLA", runs: 0, wickets: 0 },
-    //             { name: "JASIR", runs: 0, wickets: 0 },
-    //             { name: "SADAQATHULLA", runs: 0, wickets: 0 },
-    //             { name: "JASAL", runs: 0, wickets: 0 }
-    //         ]
-    //     },
-    //     result: ""
-    // },
-
-    // ----- MATCH 3 TEMPLATE -----
-    // {
-    //     no: 3,
-    //     date: "26 Oct 2026",
-    //     ground: "HSS Mecherikkunnu",
-    //     a: {
-    //         runs: 0, wickets: 0, overs: "0",
-    //         players: [
-    //             { name: "AJMAL", runs: 0, wickets: 0 },
-    //             { name: "MIDLAJ", runs: 0, wickets: 0 },
-    //             { name: "HASBULLA", runs: 0, wickets: 0 },
-    //             { name: "SHALU", runs: 0, wickets: 0 },
-    //             { name: "SADIQ", runs: 0, wickets: 0 }
-    //         ]
-    //     },
-    //     b: {
-    //         runs: 0, wickets: 0, overs: "0",
-    //         players: [
-    //             { name: "SHUHAIB", runs: 0, wickets: 0 },
-    //             { name: "ASJAL", runs: 0, wickets: 0 },
-    //             { name: "HIBATHULLA", runs: 0, wickets: 0 },
-    //             { name: "JASIR", runs: 0, wickets: 0 },
-    //             { name: "SADAQATHULLA", runs: 0, wickets: 0 },
-    //             { name: "JASAL", runs: 0, wickets: 0 }
-    //         ]
-    //     },
-    //     result: ""
-    // },
+    
+    ----- MATCH 3 TEMPLATE -----
+     {
+        no: 3,
+         date: "28 Oct 2026",
+         ground: "HSS Mecherikkunnu",
+         a: {
+             runs: 100, wickets: 2, overs: "12",
+             players: [
+                { name: "AJMAL", runs: 35, wickets: 1 },
+                { name: "MIDLAJ", runs: 15, wickets: 1 },
+                { name: "HASBULLA", runs: 30, wickets: 0 },
+                { name: "SHALU", runs: 0, wickets: 0 },
+                { name: "SADIQ", runs: 0, wickets: 0 }
+             ]
+         },
+         b: {
+             runs: 93, wickets: 2, overs: "0",
+             players: [
+                 { name: "SHUHAIB", runs: 40, wickets: 1 },
+                 { name: "ASJAL", runs: 50, wickets: 1 },
+                 { name: "HIBATHULLA", runs: 0, wickets: 0 },
+                 { name: "JASIR", runs: 0, wickets: 0 },
+                 { name: "SADAQATHULLA", runs: 3, wickets: 0 },
+                 { name: "JASAL", runs: 0, wickets: 0 }
+             ]
+         },
+          result: "KAROTHINGAL SUPER KINGS WON BY 7 RUNS"
+     },
 
     // ----- MATCH 4 TEMPLATE -----
     // {

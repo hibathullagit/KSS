@@ -47,7 +47,7 @@ var MATCHES = [
          a: {
              runs: 100, wickets: 2, overs: "12",
              players: [
-                { name: "AJMAL", runs: 35, wickets: 1 },
+                { name: "AJMAL", runs: 55, wickets: 1 },
                 { name: "MIDLAJ", runs: 15, wickets: 1 },
                 { name: "HASBULLA", runs: 30, wickets: 0 },
                 { name: "SHALU", runs: 0, wickets: 0 },
@@ -57,7 +57,7 @@ var MATCHES = [
          b: {
              runs: 93, wickets: 2, overs: "0",
              players: [
-                 { name: "SHUHAIB", runs: 40, wickets: 1 },
+                 { name: "SHUHAIB", runs: 30, wickets: 1 },
                  { name: "ASJAL", runs: 50, wickets: 1 },
                  { name: "HIBATHULLA", runs: 0, wickets: 0 },
                  { name: "JASIR", runs: 0, wickets: 0 },

@@ -31,7 +31,7 @@ var MATCHES = [
             runs: 89, wickets: 3, overs: "7.5",
             players: [
                 { name: "SHUHAIB", runs: 10, wickets: 0 },
-                { name: "HIBATHULLA", runs: 70, wickets: 2 },
+                { name: "HIBATHULLA", runs: 25, wickets: 2 },
                 { name: "ASJAL", runs: 9, wickets: 0 }
             ]
         },
@@ -59,7 +59,7 @@ var MATCHES = [
              players: [
                  { name: "SHUHAIB", runs: 30, wickets: 1 },
                  { name: "ASJAL", runs: 50, wickets: 1 },
-                 { name: "HIBATHULLA", runs: 0, wickets: 0 },
+                 { name: "HIBATHULLA", runs: 25, wickets: 0 },
                  { name: "JASIR", runs: 20, wickets: 0 },
                  { name: "SADAQATHULLA", runs: 3, wickets: 0 },
                  { name: "JASAL", runs: 1, wickets: 0 }
@@ -89,7 +89,7 @@ var MATCHES = [
              players: [
                  { name: "SHUHAIB", runs: 35, wickets: 0 },
                  { name: "ASJAL", runs: 25, wickets: 1 },
-                 { name: "HIBATHULLA", runs: 0, wickets: 2 },
+                 { name: "HIBATHULLA", runs: 20, wickets: 2 },
                  { name: "JASIR", runs: 0, wickets: 0 },
                  { name: "SADAQATHULLA", runs: 0, wickets: 0 },
                  { name: "JASAL", runs: 0, wickets: 0 }

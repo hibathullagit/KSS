@@ -68,7 +68,35 @@ var MATCHES = [
           result: "KAROTHINGAL SUPER KINGS WON BY 7 RUNS"
      },
 
-    // ----- MATCH 4 TEMPLATE -----
+    
+   
+     {
+        no: 4,
+         date: "26 Oct 2026",
+         ground: "HSS Mecherikkunnu",
+         a: {
+             runs: 56, wickets: 3, overs: "6",
+             players: [
+                { name: "AJMAL", runs: 35, wickets: 0 },
+                { name: "MIDLAJ", runs: 15, wickets: 1 },
+                { name: "HASBULLA", runs: 0, wickets: 1 },
+                { name: "SHALU", runs: 15, wickets: 0 },
+                { name: "SADIQ", runs: 0, wickets: 0 }
+             ]
+         },
+         b: {
+             runs: 60, wickets: 2, overs: "6",
+             players: [
+                 { name: "SHUHAIB", runs: 35, wickets: 0 },
+                 { name: "ASJAL", runs: 25, wickets: 1 },
+                 { name: "HIBATHULLA", runs: 0, wickets: 2 },
+                 { name: "JASIR", runs: 0, wickets: 0 },
+                 { name: "SADAQATHULLA", runs: 0, wickets: 0 },
+                 { name: "JASAL", runs: 0, wickets: 0 }
+             ]
+         },
+          result: "FIGHTERS KAROTHINGAL WON BY 3 WICKETS"
+     },
     // {
     //     no: 4,
     //     date: "2 Nov 2026",

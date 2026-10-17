@@ -50,8 +50,8 @@ var MATCHES = [
                 { name: "AJMAL", runs: 55, wickets: 1 },
                 { name: "MIDLAJ", runs: 15, wickets: 1 },
                 { name: "HASBULLA", runs: 30, wickets: 0 },
-                { name: "SHALU", runs: 0, wickets: 0 },
-                { name: "SADIQ", runs: 0, wickets: 0 }
+                { name: "SHALU", runs: 5, wickets: 0 },
+                { name: "SADIQ", runs: 5, wickets: 0 }
              ]
          },
          b: {
@@ -60,9 +60,9 @@ var MATCHES = [
                  { name: "SHUHAIB", runs: 30, wickets: 1 },
                  { name: "ASJAL", runs: 50, wickets: 1 },
                  { name: "HIBATHULLA", runs: 0, wickets: 0 },
-                 { name: "JASIR", runs: 0, wickets: 0 },
+                 { name: "JASIR", runs: 20, wickets: 0 },
                  { name: "SADAQATHULLA", runs: 3, wickets: 0 },
-                 { name: "JASAL", runs: 0, wickets: 0 }
+                 { name: "JASAL", runs: 1, wickets: 0 }
              ]
          },
           result: "KAROTHINGAL SUPER KINGS WON BY 7 RUNS"

@@ -41,8 +41,8 @@ var MATCHES = [
     
    
      {
-        no: 3,
-         date: "28 Oct 2026",
+        no: 2,
+         date: "15 Oct 2026",
          ground: "HSS Mecherikkunnu",
          a: {
              runs: 100, wickets: 2, overs: "12",
@@ -71,8 +71,8 @@ var MATCHES = [
     
    
      {
-        no: 4,
-         date: "26 Oct 2026",
+        no: 3,
+         date: "16 Oct 2026",
          ground: "HSS Mecherikkunnu",
          a: {
              runs: 56, wickets: 3, overs: "6",
@@ -333,9 +333,9 @@ var MATCHES = [
 // Date format: YYYY-MM-DD. Change the dates to the real ones.
 var FIXTURES = [
     { no: 1, date: "2026-10-12", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 2, date: "2026-10-19", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 3, date: "2026-10-26", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 4, date: "2026-11-02", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+    { no: 2, date: "2026-10-15", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+    { no: 3, date: "2026-10-16", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+    { no: 4, date: "2026-11-05", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
     { no: 5, date: "2026-11-09", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
     { no: 6, date: "2026-11-16", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
     { no: 7, date: "2026-11-23", time: "4:00 PM", ground: "HSS Mecherikkunnu" },

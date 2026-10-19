@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karothingal Super Series</title>
     <style>
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -12,6 +17,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background-color: #cfe8ff;
             background-image: url('images/bg-1.jpg');
             background-size: cover;
             background-position: center;
@@ -47,6 +53,8 @@
             width: 35%;
             text-align: center;
             font-weight: bold;
+            font-size: 16px;
+            line-height: 1.2;
         }
 
         #status .score {
@@ -120,27 +128,27 @@
         <section id="icons">
             <div class="icon-grid">
                 <a href="players.html" class="icon">
-                    <img src="images/Players.png" alt="Players">
+                    <img id="iconPlayers" src="images/Players.png" alt="Players">
                     <div class="icon-title">Players</div>
                 </a>
                 <a href="scoreboard.html" class="icon">
-                    <img src="images/Scoreboard.png" alt="Scoreboard">
+                    <img id="iconScoreboard" src="images/Scoreboard.png" alt="Scoreboard">
                     <div class="icon-title">Scoreboard</div>
                 </a>
                 <a href="statistics.html" class="icon">
-                    <img src="images/Statistics.png" alt="Statistics">
+                    <img id="iconStatistics" src="images/Statistics.png" alt="Statistics">
                     <div class="icon-title">Statistics</div>
                 </a>
                 <a href="gallery.html" class="icon">
-                    <img src="images/Gallery.png" alt="Gallery">
+                    <img id="iconGallery" src="images/Gallery.png" alt="Gallery">
                     <div class="icon-title">Gallery</div>
                 </a>
                 <a href="fixtures.html" class="icon">
-                    <img src="images/Fixtures.png" alt="Fixtures">
+                    <img id="iconFixtures" src="images/Fixtures.png" alt="Fixtures">
                     <div class="icon-title">Fixtures</div>
                 </a>
                 <a href="calculator.html" class="icon">
-                    <img src="images/Calculator.png" alt="Calculator">
+                    <img id="iconCalculator" src="images/Calculator.png" alt="Calculator">
                     <div class="icon-title">Calculator</div>
                 </a>
             </div>
@@ -153,11 +161,27 @@
 
     <script src="data.js"></script>
     <script src="scores.js"></script>
+    <script src="photos.js"></script>
     <script>
         // ---------- Home score ----------
         var series = computeSeries();
         document.getElementById("winsA").textContent = series.winsA;
         document.getElementById("winsB").textContent = series.winsB;
+
+        // ---------- Photos (newest online, last saved offline) ----------
+        kssPhoto(document.getElementById("iconPlayers"), "icon-players");
+        kssPhoto(document.getElementById("iconScoreboard"), "icon-scoreboard");
+        kssPhoto(document.getElementById("iconStatistics"), "icon-statistics");
+        kssPhoto(document.getElementById("iconGallery"), "icon-gallery");
+        kssPhoto(document.getElementById("iconFixtures"), "icon-fixtures");
+        kssPhoto(document.getElementById("iconCalculator"), "icon-calculator");
+
+        // Background: set on the page once its photo is ready
+        var bgImg = new Image();
+        bgImg.onload = function () {
+            document.body.style.backgroundImage = "url('" + bgImg.src + "')";
+        };
+        kssPhoto(bgImg, "background");
     </script>
 </body>
 </html>

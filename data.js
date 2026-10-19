@@ -53,3 +53,37 @@ var FIXTURES = [
 //     },
 //     result: ""
 // },
+// ----- PHOTOS (file names inside KSS/images) -----
+// To change a picture: upload the new file with a NEW name,
+// then change its name here.
+var PHOTOS = {
+    "background": "bg-1.jpg",
+    "kss-logo": "kss-logo.png",
+    "logo-ksk-players": "team1.png",
+    "logo-fk-players": "fighters-logo.png",
+    "logo-ksk-page": "ksk-logo.png",
+    "logo-fk-page": "fk-logo.png",
+    "icon-players": "Players.png",
+    "icon-scoreboard": "Scoreboard.png",
+    "icon-statistics": "Statistics.png",
+    "icon-gallery": "Gallery.png",
+    "icon-fixtures": "Fixtures.png",
+    "icon-calculator": "Calculator.png",
+    "AJMAL": "player1.png",
+    "MIDLAJ": "player2.png",
+    "HASBULLA": "player3.png",
+    "SHALU": "player4.png",
+    "SADIQ": "player5.png",
+    "SHUHAIB": "fplayer1.png",
+    "ASJAL": "fplayer2.png",
+    "HIBATHULLA": "fplayer3.png",
+    "JASIR": "fplayer4.png",
+    "SADAQATHULLA": "fplayer5.png",
+    "JASAL": "fplayer6.png"
+};
+
+// ----- GALLERY ALBUMS (photos inside KSS/images/gallery) -----
+// One line per album. Remove the // to use an example.
+var ALBUMS = [
+    // { title: "Match 1", photos: ["gallery/m1-1.jpg", "gallery/m1-2.jpg"] },
+];

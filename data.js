@@ -332,15 +332,16 @@ var MATCHES = [
 // ----- UPCOMING MATCHES (fixtures) -----
 // Date format: YYYY-MM-DD. Change the dates to the real ones.
 var FIXTURES = [
-    { no: 1, date: "2026-10-12", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 2, date: "2026-10-15", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 3, date: "2026-10-16", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 4, date: "2026-11-05", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 5, date: "2026-11-09", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 6, date: "2026-11-16", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 7, date: "2026-11-23", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 8, date: "2026-11-30", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 9, date: "2026-12-07", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 10, date: "2026-12-14", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
-    { no: 11, date: "2026-12-21", time: "4:00 PM", ground: "HSS Mecherikkunnu" }
+ //   { no: 1, date: "2026-10-12", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+//    { no: 2, date: "2026-10-15", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+//    { no: 3, date: "2026-10-16", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+//    { no: 4, date: "2026-11-05", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+//    { no: 5, date: "2026-11-09", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+ //   { no: 6, date: "2026-11-16", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+   // { no: 7, date: "2026-11-23", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+//    { no: 8, date: "2026-11-30", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+ //   { no: 9, date: "2026-12-07", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+//    { no: 10, date: "2026-12-14", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
+//    { no: 11, date: "2026-12-21", time: "4:00 PM", ground: "HSS Mecherikkunnu" }
 ];
+//

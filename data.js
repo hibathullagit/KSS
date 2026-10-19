@@ -14,29 +14,29 @@ var TEAM_A = "KAROTHINGAL SUPER KINGS";
 var TEAM_B = "FIGHTERS KAROTHINGAL";
 
 // ----- PLAYED MATCHES (scores) -----
-var MATCHES = [
+// var MATCHES = [
   //  {
-        no: 1,
-        date: "12 Oct 2026",
-        ground: "HSS Mecherikkunnu",
-        a: {
-            runs: 85, wickets: 2, overs: "8",
-            players: [
-                { name: "AJMAL", runs: 10, wickets: 1 },
-                { name: "MIDLAJ", runs: 20, wickets: 1 },
-                { name: "HASBULLA", runs: 15, wickets: 1 }
-            ]
-        },
-        b: {
-            runs: 89, wickets: 3, overs: "7.5",
-            players: [
-                { name: "SHUHAIB", runs: 10, wickets: 0 },
-                { name: "HIBATHULLA", runs: 25, wickets: 2 },
-                { name: "ASJAL", runs: 9, wickets: 0 }
-            ]
-        },
-        result: "FIGHTERS KAROTHINGAL won by 7 wickets"
-    },//
+    //    no: 1,
+//        date: "12 Oct 2026",
+ //       ground: "HSS Mecherikkunnu",
+//        a: {
+     //       runs: 85, wickets: 2, overs: "8",
+      //      players: [
+             //   { name: "AJMAL", runs: 10, wickets: 1 },
+            //    { name: "MIDLAJ", runs: 20, wickets: 1 },
+           //     { name: "HASBULLA", runs: 15, wickets: 1 }
+       //     ]
+   //     },
+   //     b: {
+     //       runs: 89, wickets: 3, overs: "7.5",
+        //    players: [
+             //   { name: "SHUHAIB", runs: 10, wickets: 0 },
+             //   { name: "HIBATHULLA", runs: 25, wickets: 2 },
+       //         { name: "ASJAL", runs: 9, wickets: 0 }
+       //     ]
+   //     },
+   //     result: "FIGHTERS KAROTHINGAL won by 7 wickets"
+//    },//
 
     
    

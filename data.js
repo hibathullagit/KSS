@@ -40,63 +40,7 @@ var TEAM_B = "FIGHTERS KAROTHINGAL";
 
     
    
-   //  {
-        no: 2,
-         date: "15 Oct 2026",
-         ground: "HSS Mecherikkunnu",
-         a: {
-             runs: 100, wickets: 2, overs: "12",
-             players: [
-                { name: "AJMAL", runs: 55, wickets: 1 },
-                { name: "MIDLAJ", runs: 15, wickets: 1 },
-                { name: "HASBULLA", runs: 30, wickets: 0 },
-                { name: "SHALU", runs: 5, wickets: 0 },
-                { name: "SADIQ", runs: 5, wickets: 0 }
-             ]
-         },
-         b: {
-             runs: 93, wickets: 2, overs: "0",
-             players: [
-                 { name: "SHUHAIB", runs: 30, wickets: 1 },
-                 { name: "ASJAL", runs: 50, wickets: 1 },
-                 { name: "HIBATHULLA", runs: 25, wickets: 0 },
-                 { name: "JASIR", runs: 20, wickets: 0 },
-                 { name: "SADAQATHULLA", runs: 3, wickets: 0 },
-                 { name: "JASAL", runs: 1, wickets: 0 }
-             ]
-         },
-          result: "KAROTHINGAL SUPER KINGS WON BY 7 RUNS"
-     }, //
 
-    
-   
- //    {
-        no: 3,
-         date: "16 Oct 2026",
-         ground: "HSS Mecherikkunnu",
-         a: {
-             runs: 56, wickets: 3, overs: "6",
-             players: [
-                { name: "AJMAL", runs: 35, wickets: 0 },
-                { name: "MIDLAJ", runs: 15, wickets: 1 },
-                { name: "HASBULLA", runs: 0, wickets: 1 },
-                { name: "SHALU", runs: 15, wickets: 0 },
-                { name: "SADIQ", runs: 0, wickets: 0 }
-             ]
-         },
-         b: {
-             runs: 60, wickets: 2, overs: "6",
-             players: [
-                 { name: "SHUHAIB", runs: 35, wickets: 0 },
-                 { name: "ASJAL", runs: 25, wickets: 1 },
-                 { name: "HIBATHULLA", runs: 20, wickets: 2 },
-                 { name: "JASIR", runs: 0, wickets: 0 },
-                 { name: "SADAQATHULLA", runs: 0, wickets: 0 },
-                 { name: "JASAL", runs: 0, wickets: 0 }
-             ]
-         },
-          result: "FIGHTERS KAROTHINGAL WON BY 3 WICKETS"
-     },//
     // {
     //     no: 4,
     //     date: "2 Nov 2026",
@@ -331,7 +275,7 @@ var TEAM_B = "FIGHTERS KAROTHINGAL";
 
 // ----- UPCOMING MATCHES (fixtures) -----
 // Date format: YYYY-MM-DD. Change the dates to the real ones.
-var FIXTURES = [
+//var FIXTURES = [
  //   { no: 1, date: "2026-10-12", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
 //    { no: 2, date: "2026-10-15", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
 //    { no: 3, date: "2026-10-16", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
@@ -343,5 +287,5 @@ var FIXTURES = [
  //   { no: 9, date: "2026-12-07", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
 //    { no: 10, date: "2026-12-14", time: "4:00 PM", ground: "HSS Mecherikkunnu" },
 //    { no: 11, date: "2026-12-21", time: "4:00 PM", ground: "HSS Mecherikkunnu" }
-];
+//];
 //

@@ -149,37 +149,39 @@
         </div>
     </footer>
 
+    <script src="data.js"></script>
+    <script src="photos.js"></script>
     <script>
-        // ===== EDIT ALBUMS HERE =====
-        // Put your photos in the folder images/gallery/ and list them below.
-        // Example (remove the // to try it):
-        // { title: "Match 1", photos: ["images/gallery/m1-1.jpg", "images/gallery/m1-2.jpg"] },
-        var ALBUMS = [
-        ];
-        // ============================
+        // Albums come from ALBUMS in data.js.
+        // Only albums with a title and at least one photo are shown.
+        var albumList = (typeof ALBUMS !== "undefined" ? ALBUMS : []).filter(function (a) {
+            return a && a.title && a.photos && a.photos.length > 0;
+        });
 
         var box = document.getElementById("albums");
 
-        if (ALBUMS.length === 0) {
+        if (albumList.length === 0) {
             var html = '<div class="card"><p class="note">Photos coming soon.</p><div class="photo-grid">';
             for (var i = 0; i < 6; i++) html += '<div class="placeholder">&#128247;</div>';
             box.innerHTML = html + '</div></div>';
         }
 
-        ALBUMS.forEach(function (album) {
+        albumList.forEach(function (album) {
             var card = document.createElement("div");
             card.className = "card";
+
             var title = document.createElement("h2");
             title.textContent = album.title;
+
             var grid = document.createElement("div");
             grid.className = "photo-grid";
 
-            album.photos.forEach(function (src) {
+            album.photos.forEach(function (file) {
                 var img = document.createElement("img");
-                img.src = src;
                 img.alt = album.title;
-                img.onclick = function () { openViewer(src); };
+                img.onclick = function () { openViewer(img); };
                 grid.appendChild(img);
+                kssShowFile(img, file);   // newest online, or last saved copy
             });
 
             card.appendChild(title);
@@ -187,8 +189,8 @@
             box.appendChild(card);
         });
 
-        function openViewer(src) {
-            document.getElementById("viewerImg").src = src;
+        function openViewer(img) {
+            document.getElementById("viewerImg").src = img.src;
             document.getElementById("viewer").style.display = "flex";
         }
 

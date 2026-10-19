@@ -15,7 +15,7 @@ var TEAM_B = "FIGHTERS KAROTHINGAL";
 
 // ----- PLAYED MATCHES (scores) -----
 var MATCHES = [
-    {
+  //  {
         no: 1,
         date: "12 Oct 2026",
         ground: "HSS Mecherikkunnu",
@@ -36,11 +36,11 @@ var MATCHES = [
             ]
         },
         result: "FIGHTERS KAROTHINGAL won by 7 wickets"
-    },
+    },//
 
     
    
-     {
+   //  {
         no: 2,
          date: "15 Oct 2026",
          ground: "HSS Mecherikkunnu",
@@ -66,11 +66,11 @@ var MATCHES = [
              ]
          },
           result: "KAROTHINGAL SUPER KINGS WON BY 7 RUNS"
-     },
+     }, //
 
     
    
-     {
+ //    {
         no: 3,
          date: "16 Oct 2026",
          ground: "HSS Mecherikkunnu",
@@ -96,7 +96,7 @@ var MATCHES = [
              ]
          },
           result: "FIGHTERS KAROTHINGAL WON BY 3 WICKETS"
-     },
+     },//
     // {
     //     no: 4,
     //     date: "2 Nov 2026",

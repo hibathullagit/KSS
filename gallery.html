@@ -75,32 +75,52 @@
             margin: 0 0 12px;
         }
 
-        /* Full screen viewer */
+        /* Full-screen viewer */
         #viewer {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            flex-direction: column;
+            background: #000;
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            touch-action: pan-y;
         }
 
-        #viewer img {
-            max-width: 95%;
-            max-height: 80%;
-            border-radius: 8px;
+        #viewerImg {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
-        #viewer .close-btn {
-            margin-top: 20px;
+        #viewer .top {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
             color: white;
-            font-size: 20px;
-            background: #c62828;
-            padding: 10px 30px;
-            border-radius: 8px;
+            font-size: 15px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0));
+        }
+
+        #viewer .close-x {
+            font-size: 30px;
+            line-height: 1;
             cursor: pointer;
+            padding: 0 6px;
+        }
+
+        #viewer .caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 40px 18px 22px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.75));
         }
 
         footer {
@@ -137,9 +157,13 @@
 
     <main id="albums"></main>
 
-    <div id="viewer" onclick="closeViewer()">
-        <img id="viewerImg" src="" alt="Photo">
-        <div class="close-btn" onclick="closeViewer()">Close</div>
+    <div id="viewer">
+        <div class="top">
+            <span id="counter"></span>
+            <span class="close-x" onclick="closeViewer()">&times;</span>
+        </div>
+        <img id="viewerImg" alt="Photo">
+        <div class="caption" id="capTitle"></div>
     </div>
 
     <footer>
@@ -159,6 +183,10 @@
         });
 
         var box = document.getElementById("albums");
+        var viewer = document.getElementById("viewer");
+        var viewerImg = document.getElementById("viewerImg");
+        var viewerAlbum = null;
+        var viewerIndex = 0;
 
         if (albumList.length === 0) {
             var html = '<div class="card"><p class="note">Photos coming soon.</p><div class="photo-grid">';
@@ -166,37 +194,68 @@
             box.innerHTML = html + '</div></div>';
         }
 
-        albumList.forEach(function (album) {
+        albumList.forEach(function (album, ai) {
             var card = document.createElement("div");
             card.className = "card";
 
             var title = document.createElement("h2");
             title.textContent = album.title;
+            card.appendChild(title);
 
             var grid = document.createElement("div");
             grid.className = "photo-grid";
 
-            album.photos.forEach(function (file) {
+            album.photos.forEach(function (file, pi) {
                 var img = document.createElement("img");
                 img.alt = album.title;
-                img.onclick = function () { openViewer(img); };
+                img.onclick = function () { openViewer(ai, pi); };
                 grid.appendChild(img);
                 kssShowFile(img, file);   // newest online, or last saved copy
             });
 
-            card.appendChild(title);
             card.appendChild(grid);
             box.appendChild(card);
         });
 
-        function openViewer(img) {
-            document.getElementById("viewerImg").src = img.src;
-            document.getElementById("viewer").style.display = "flex";
+        function openViewer(albumIndex, photoIndex) {
+            viewerAlbum = albumList[albumIndex];
+            viewerIndex = photoIndex;
+            showCurrent();
+            viewer.style.display = "flex";
+        }
+
+        function showCurrent() {
+            kssShowFile(viewerImg, viewerAlbum.photos[viewerIndex]);
+            document.getElementById("counter").textContent =
+                (viewerIndex + 1) + " / " + viewerAlbum.photos.length;
+            document.getElementById("capTitle").textContent = viewerAlbum.title;
+        }
+
+        function step(direction) {
+            var next = viewerIndex + direction;
+            if (next < 0 || next >= viewerAlbum.photos.length) return;
+            viewerIndex = next;
+            showCurrent();
         }
 
         function closeViewer() {
-            document.getElementById("viewer").style.display = "none";
+            viewer.style.display = "none";
         }
+
+        // Swipe left for the next photo, right for the previous one
+        var startX = null;
+        viewer.addEventListener("touchstart", function (e) {
+            startX = e.changedTouches[0].clientX;
+        }, { passive: true });
+
+        viewer.addEventListener("touchend", function (e) {
+            if (startX === null) return;
+            var dx = e.changedTouches[0].clientX - startX;
+            startX = null;
+            if (Math.abs(dx) > 50) {
+                step(dx < 0 ? 1 : -1);
+            }
+        }, { passive: true });
     </script>
 </body>
 </html>

@@ -188,6 +188,10 @@
         var viewerAlbum = null;
         var viewerIndex = 0;
 
+        // Full-screen state, so the phone's Back button closes the photo first
+        var viewerOpen = false;
+        var ignoreNextPop = false;
+
         if (albumList.length === 0) {
             var html = '<div class="card"><p class="note">Photos coming soon.</p><div class="photo-grid">';
             for (var i = 0; i < 6; i++) html += '<div class="placeholder">&#128247;</div>';
@@ -221,6 +225,11 @@
             viewerAlbum = albumList[albumIndex];
             viewerIndex = photoIndex;
             showCurrent();
+            if (!viewerOpen) {
+                // Add a step to the history, so Back returns here first
+                history.pushState({ kssViewer: true }, "");
+            }
+            viewerOpen = true;
             viewer.style.display = "flex";
         }
 
@@ -238,9 +247,27 @@
             showCurrent();
         }
 
-        function closeViewer() {
+        // fromBack = true when the phone's Back button already removed the history step
+        function closeViewer(fromBack) {
+            if (!viewerOpen) return;
+            viewerOpen = false;
             viewer.style.display = "none";
+            if (!fromBack) {
+                ignoreNextPop = true;
+                history.back();   // remove the history step we added
+            }
         }
+
+        // Phone Back button (or the page Back button) while a photo is open
+        window.addEventListener("popstate", function () {
+            if (ignoreNextPop) {
+                ignoreNextPop = false;
+                return;
+            }
+            if (viewerOpen) {
+                closeViewer(true);
+            }
+        });
 
         // Swipe left for the next photo, right for the previous one
         var startX = null;

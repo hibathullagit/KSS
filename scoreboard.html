@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('images/bg-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        header h1 { margin: 0; }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Series tally */
+        .tally {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: blue;
+            font-weight: bold;
+        }
+
+        .tally .team { width: 35%; text-align: center; font-size: 16px; }
+        .tally .num { font-size: 32px; }
+        .tally .dash { font-size: 28px; }
+
+        .tally-sub {
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Match summary cards */
+        .match { cursor: pointer; }
+
+        .match-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .match-no {
+            font-weight: bold;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .match-ground {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .team-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            font-weight: bold;
+        }
+
+        .team-row.winner { color: #2e7d32; }
+        .team-row .score { font-size: 20px; }
+        .team-row small { font-weight: normal; color: #555; margin-left: 6px; }
+
+        .result {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .hint {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-top: 6px;
+        }
+
+        /* Scorecard (opens when the card is tapped) */
+        .details {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid #4CAF50;
+        }
+
+        .match.open .details { display: block; }
+
+        .details h3 {
+            margin: 12px 0 6px;
+            font-size: 15px;
+            color: blue;
+        }
+
+        .details table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .details th, .details td {
+            padding: 6px 4px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .details th:first-child, .details td:first-child { text-align: left; }
+        .details th { background: #eee; font-size: 13px; }
+
+        .none {
+            font-size: 14px;
+            color: #777;
+            font-style: italic;
+        }
+
+        .empty { text-align: center; color: #555; }
+
+        footer {
+            text-align: center;
+            padding: 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button {
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button:hover { background-color: #777; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SCOREBOARD</h1>
+    </header>
+
+    <main>
+        <div class="card" id="tallyCard"></div>
+        <div id="matches"></div>
+    </main>
+
+    <footer>
+        <div class="buttons">
+            <a href="kss.html" class="button">Home</a>
+            <a href="javascript:history.back()" class="button">Back</a>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="scores.js"></script>
+    <script>
+        var s = computeSeries();
+
+        // Series tally box
+        document.getElementById("tallyCard").innerHTML =
+            '<div class="tally">' +
+                '<span class="team">' + TEAM_A + '</span>' +
+                '<span class="num">' + s.winsA + '</span>' +
+                '<span class="dash">-</span>' +
+                '<span class="num">' + s.winsB + '</span>' +
+                '<span class="team">' + TEAM_B + '</span>' +
+            '</div>' +
+            '<div class="tally-sub">' + MATCHES.length + '</div>';
+
+        function teamRow(name, t, isWinner) {
+            return '<div class="team-row' + (isWinner ? ' winner' : '') + '">' +
+                   '<span>' + name + '</span>' +
+                   '<span class="score">' + t.runs + '/' + t.wickets +
+                   '<small>(' + t.overs + ' ov)</small></span></div>';
+        }
+
+        function scorecard(name, t) {
+            var html = '<h3>' + name + '</h3>';
+            if (!t.players || t.players.length === 0) {
+                return html + '<div class="none">Player scores not added yet.</div>';
+            }
+            html += '<table><tr><th>Player</th><th>Runs</th><th>Wickets</th></tr>';
+            t.players.forEach(function (p) {
+                html += '<tr><td>' + p.name + '</td><td>' + p.runs +
+                        '</td><td>' + p.wickets + '</td></tr>';
+            });
+            return html + '</table>';
+        }
+
+        var box = document.getElementById("matches");
+        if (MATCHES.length === 0) {
+            box.innerHTML = '<div class="card empty">No matches played yet.</div>';
+        }
+
+        // Sort by match number, highest first:
+        // latest match on top, Match 1 at the bottom.
+        var sortedMatches = MATCHES.slice().sort(function (a, b) {
+            return b.no - a.no;
+        });
+
+        sortedMatches.forEach(function (m) {
+            var card = document.createElement("div");
+            card.className = "card match";
+            card.id = "match-" + m.no;
+            card.onclick = function () { card.classList.toggle("open"); };
+            card.innerHTML =
+                '<div class="match-top"><span class="match-no">Match ' + m.no +
+                '</span><span>' + m.date + '</span></div>' +
+                (m.ground ? '<div class="match-ground">&#128205; ' + m.ground + '</div>' : '') +
+                teamRow(TEAM_A, m.a, m.winner === "A") +
+                teamRow(TEAM_B, m.b, m.winner === "B") +
+                '<div class="result">' + m.result + '</div>' +
+                '<div class="hint">Tap to see the scorecard</div>' +
+                '<div class="details">' + scorecard(TEAM_A, m.a) + scorecard(TEAM_B, m.b) + '</div>';
+            box.appendChild(card);
+        });
+
+        // Opened from a fixture card: open that match's scorecard and scroll to it
+        if (location.hash) {
+            var target = document.getElementById(location.hash.substring(1));
+            if (target) {
+                target.classList.add("open");
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }
+    </script>
+</body>
+</html>

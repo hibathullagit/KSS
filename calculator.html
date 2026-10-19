@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('images/bg-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        header h1 { margin: 0; }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin: 0 0 12px;
+            font-size: 18px;
+            text-align: center;
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .c-blue h2 { background: #1976d2; }
+        .c-green h2 { background: #4CAF50; }
+        .c-orange h2 { background: #ff9800; }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #555;
+            margin: 8px 0 4px;
+        }
+
+        input, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .row2 { display: flex; gap: 10px; }
+        .row2 > div { flex: 1; min-width: 0; }
+
+        .result {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #e8f5e9;
+            color: #1b5e20;
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .result b { font-size: 18px; }
+
+        .res-orange { background: #fff3e0; color: #e65100; }
+        .res-purple { background: #f3e5f5; color: #4a148c; }
+
+        .hint {
+            font-size: 12px;
+            color: #777;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button {
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button:hover { background-color: #777; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CALCULATOR</h1>
+    </header>
+
+    <main>
+
+        <div class="card c-blue">
+            <h2>RUN RATE</h2>
+            <label for="rrRuns">Runs scored</label>
+            <input id="rrRuns" type="number" inputmode="numeric" placeholder="e.g. 75" oninput="updateRR()">
+            <label for="rrOvers">Overs bowled (10.3 = 10 overs 3 balls)</label>
+            <input id="rrOvers" type="text" inputmode="decimal" placeholder="e.g. 10.3" oninput="updateRR()">
+            <div class="result" id="rrResult"></div>
+        </div>
+
+        <div class="card c-green">
+            <h2>REQUIRED RUN RATE</h2>
+            <div class="row2">
+                <div>
+                    <label for="rrTarget">Target</label>
+                    <input id="rrTarget" type="number" inputmode="numeric" placeholder="e.g. 150" oninput="updateRRR()">
+                </div>
+                <div>
+                    <label for="rrScored">Scored so far</label>
+                    <input id="rrScored" type="number" inputmode="numeric" placeholder="e.g. 60" oninput="updateRRR()">
+                </div>
+            </div>
+            <div class="row2">
+                <div>
+                    <label for="rrTotal">Total overs</label>
+                    <input id="rrTotal" type="text" inputmode="decimal" placeholder="e.g. 8" oninput="updateRRR()">
+                </div>
+                <div>
+                    <label for="rrBowled">Overs bowled so far</label>
+                    <input id="rrBowled" type="text" inputmode="decimal" placeholder="e.g. 3.2" oninput="updateRRR()">
+                </div>
+            </div>
+            <div class="result" id="rrrResult"></div>
+        </div>
+
+        <div class="card c-orange">
+            <h2>CAP CHASE</h2>
+            <label for="capPlayer">Choose a player</label>
+            <select id="capPlayer" onchange="updateCap()"></select>
+            <div class="result res-orange" id="orangeResult"></div>
+            <div class="result res-purple" id="purpleResult"></div>
+            <div class="hint">Updates automatically after each match.</div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="buttons">
+            <a href="kss.html" class="button">Home</a>
+            <a href="javascript:history.back()" class="button">Back</a>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        // ---------- Player totals (same numbers as Statistics) ----------
+        var players = {};
+        MATCHES.forEach(function (m) {
+            [[TEAM_A, m.a], [TEAM_B, m.b]].forEach(function (x) {
+                (x[1].players || []).forEach(function (p) {
+                    var key = x[0] + "|" + p.name;
+                    var o = players[key];
+                    if (!o) { o = players[key] = { name: p.name, team: x[0], runs: 0, wkts: 0 }; }
+                    o.runs += p.runs;
+                    o.wkts += p.wickets;
+                });
+            });
+        });
+        var list = Object.keys(players).map(function (k) { return players[k]; });
+
+        // ---------- Overs helpers ----------
+        // "10.3" means 10 overs and 3 balls. Returns the total number of balls.
+        function oversToBalls(s) {
+            var str = String(s == null ? "" : s).trim();
+            if (!/^\d+(\.\d)?$/.test(str)) return NaN;
+            var p = str.split(".");
+            var o = parseInt(p[0], 10);
+            var b = p[1] ? parseInt(p[1], 10) : 0;
+            if (b > 5) return NaN;
+            return o * 6 + b;
+        }
+
+        // ---------- Run rate ----------
+        function runRate(runs, overs) {
+            var balls = oversToBalls(overs);
+            if (isNaN(runs) || isNaN(balls) || balls === 0) return null;
+            return runs / (balls / 6);
+        }
+
+        function updateRR() {
+            var runs = parseFloat(document.getElementById("rrRuns").value);
+            var rr = runRate(runs, document.getElementById("rrOvers").value);
+            document.getElementById("rrResult").innerHTML = (rr === null)
+                ? "Enter runs and overs"
+                : "Run rate: <b>" + rr.toFixed(2) + "</b> per over";
+        }
+
+        // ---------- Required run rate ----------
+        function updateRRR() {
+            var target = parseFloat(document.getElementById("rrTarget").value);
+            var scored = parseFloat(document.getElementById("rrScored").value);
+            var totalBalls = oversToBalls(document.getElementById("rrTotal").value);
+            var bowledBalls = oversToBalls(document.getElementById("rrBowled").value);
+            var out = document.getElementById("rrrResult");
+
+            if (isNaN(target) || isNaN(scored)) {
+                out.innerHTML = "Enter the target and runs scored";
+                return;
+            }
+            var need = target - scored;
+            if (need <= 0) {
+                out.innerHTML = "Target reached!";
+                return;
+            }
+            if (isNaN(totalBalls) || isNaN(bowledBalls)) {
+                out.innerHTML = "Enter total overs and overs bowled so far";
+                return;
+            }
+            var balls = totalBalls - bowledBalls;
+            if (balls <= 0) {
+                out.innerHTML = "No overs left";
+                return;
+            }
+            var leftOvers = Math.floor(balls / 6) + "." + (balls % 6);
+            var rate = need / (balls / 6);
+            out.innerHTML = "Need <b>" + need + "</b> runs from <b>" + leftOvers + "</b> overs<br>" +
+                            "Required rate: <b>" + rate.toFixed(2) + "</b> per over";
+        }
+
+        // ---------- Cap chase ----------
+        function unitWord(n, one, many) { return n === 1 ? one : many; }
+
+        // i = the chosen player, key = "runs" or "wkts"
+        function capStatus(i, key, one, many) {
+            var p = list[i];
+            if (list.length < 2) return "Add another player to compare.";
+
+            var topVal = -1, topName = "";
+            list.forEach(function (q, j) {
+                if (j !== i && q[key] > topVal) { topVal = q[key]; topName = q.name; }
+            });
+
+            if (p[key] > topVal) {
+                var lead = p[key] - topVal;
+                return "Holds the cap. Lead over " + topName + ": <b>" + lead + "</b> " +
+                       unitWord(lead, one, many) + ".";
+            }
+            if (p[key] === topVal) {
+                if (p[key] === 0) return "No " + many + " yet.";
+                return "Tied with " + topName + " on <b>" + topVal + "</b> " + many + ".";
+            }
+            var need = topVal - p[key] + 1;
+            return "Needs <b>" + need + "</b> more " + unitWord(need, one, many) +
+                   " to take the cap from " + topName + " (" + topVal + ").";
+        }
+
+        function updateCap() {
+            if (list.length === 0) return;
+            var i = parseInt(document.getElementById("capPlayer").value, 10);
+            if (isNaN(i) || !list[i]) i = 0;
+            document.getElementById("orangeResult").innerHTML =
+                "<b>Orange cap</b><br>" + capStatus(i, "runs", "run", "runs");
+            document.getElementById("purpleResult").innerHTML =
+                "<b>Purple cap</b><br>" + capStatus(i, "wkts", "wicket", "wickets");
+        }
+
+        function fillPlayers() {
+            var sel = document.getElementById("capPlayer");
+            if (list.length === 0) {
+                sel.innerHTML = '<option value="">No players yet</option>';
+                document.getElementById("orangeResult").innerHTML =
+                    "Add match data in data.js to see the cap chase.";
+                document.getElementById("purpleResult").innerHTML = "";
+                return;
+            }
+            sel.innerHTML = list.map(function (p, i) {
+                return '<option value="' + i + '">' + p.name + ' (' + p.team + ')</option>';
+            }).join("");
+            sel.value = "0";
+            updateCap();
+        }
+
+        // ---------- Start ----------
+        updateRR();
+        updateRRR();
+        fillPlayers();
+    </script>
+</body>
+</html>

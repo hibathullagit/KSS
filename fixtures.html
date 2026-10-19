@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixtures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('images/bg-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        header h1 { margin: 0; }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .section-title {
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.55);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 0 0 12px;
+        }
+
+        .card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .match-no {
+            font-weight: bold;
+            color: #222;
+            font-size: 14px;
+        }
+
+        .tag {
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            background: #ff9800;
+            padding: 3px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .tag.today { background: #c62828; }
+
+        .match {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 6px;
+        }
+
+        .team {
+            width: 110px;
+            text-align: center;
+        }
+
+        .logo {
+            position: relative;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            margin: 0 auto 6px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .vs {
+            font-weight: bold;
+            color: #777;
+        }
+
+        .ground {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .result {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            color: #2e7d32;
+        }
+
+        .result.pending {
+            color: #777;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .card.past { opacity: 0.85; }
+        .card.past .tag { background: #888; }
+        .card.past .logo { background: #999 !important; }
+
+        .empty {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button {
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button:hover { background-color: #777; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FIXTURES</h1>
+    </header>
+
+    <main>
+        <div class="section-title">UPCOMING</div>
+        <div id="upcoming"></div>
+
+        <div class="section-title">PAST</div>
+        <div id="past"></div>
+    </main>
+
+    <footer>
+        <div class="buttons">
+            <a href="kss.html" class="button">Home</a>
+            <a href="javascript:history.back()" class="button">Back</a>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="scores.js"></script>
+    <script>
+        // ===== TEAM LOOK (change names / logo files here) =====
+        var SHORT_A = "Super Kings", INITIALS_A = "KSK", LOGO_A = "images/ksk-logo.png";
+        var SHORT_B = "Fighters",    INITIALS_B = "FK",  LOGO_B = "images/fk-logo.png";
+        // =======================================================
+
+        // Works out each played match's winner and result text (from scores.js)
+        computeSeries();
+
+        // Fixtures live in data.js (FIXTURES list). If it isn't there yet, show empty.
+        var LIST = (typeof FIXTURES !== "undefined") ? FIXTURES : [];
+
+        var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        function parseDate(s) {
+            var p = s.split("-");
+            return new Date(+p[0], +p[1] - 1, +p[2]);
+        }
+
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        var upcoming = [], past = [];
+        LIST.forEach(function (f, i) {
+            f.no = f.no || (i + 1);            // match number (from data.js, or order in the list)
+            var d = parseDate(f.date);
+            f.d = d;
+            f.diff = Math.round((d - today) / 86400000);
+            if (f.diff >= 0) upcoming.push(f); else past.push(f);
+        });
+
+        upcoming.sort(function (a, b) { return a.d - b.d; });   // soonest first
+        past.sort(function (a, b) { return b.d - a.d; });       // latest first
+
+        function tagText(f) {
+            if (f.diff < 0) return "Played";
+            if (f.diff === 0) return "Today";
+            if (f.diff === 1) return "Tomorrow";
+            return "In " + f.diff + " days";
+        }
+
+        function teamHTML(logo, initials, name, color) {
+            return '<div class="team"><div class="logo" style="background:' + color + '">' +
+                   '<span>' + initials + '</span>' +
+                   '<img src="' + logo + '" alt="" onerror="this.style.display=\'none\'"></div>' +
+                   '<div class="team-name">' + name + '</div></div>';
+        }
+
+        // Find the played match with the same number (for the result line)
+        function playedMatch(no) {
+            var found = MATCHES.filter(function (m) { return m.no === no; });
+            return found.length ? found[0] : null;
+        }
+
+        function cardHTML(f, isPast) {
+            var d = f.d;
+            var when = DAYS[d.getDay()] + ", " + d.getDate() + " " + MONTHS[d.getMonth()] + " " + d.getFullYear() +
+                       (f.time ? " | " + f.time : "");
+
+            var resultHTML = "";
+            if (isPast) {
+                var m = playedMatch(f.no);
+                resultHTML = m
+                    ? '<div class="result">' + m.result + '</div>'
+                    : '<div class="result pending">Result not entered yet</div>';
+            }
+
+            var inner =
+                   '<div class="top"><span class="match-no">Match ' + f.no + '</span>' +
+                   '<span>' + when + '</span>' +
+                   '<span class="tag' + (f.diff === 0 ? ' today' : '') + '">' + tagText(f) + '</span></div>' +
+                   '<div class="match">' +
+                       teamHTML(LOGO_A, INITIALS_A, SHORT_A, "#4CAF50") +
+                       '<div class="vs">vs</div>' +
+                       teamHTML(LOGO_B, INITIALS_B, SHORT_B, "#1976d2") +
+                   '</div>' +
+                   (f.ground ? '<div class="ground">&#128205; ' + f.ground + '</div>' : '') +
+                   resultHTML;
+
+            // Played matches link to their scorecard. Upcoming matches have none yet, so no link.
+            if (isPast) {
+                return '<a class="card past" href="scoreboard.html#match-' + f.no + '">' + inner + '</a>';
+            }
+            return '<div class="card">' + inner + '</div>';
+        }
+
+        function fill(id, items, isPast, emptyText) {
+            var el = document.getElementById(id);
+            if (items.length === 0) {
+                el.innerHTML = '<div class="empty">' + emptyText + '</div>';
+                return;
+            }
+            el.innerHTML = items.map(function (f) { return cardHTML(f, isPast); }).join("");
+        }
+
+        fill("upcoming", upcoming, false, "No upcoming matches yet.");
+        fill("past", past, true, "No past fixtures yet.");
+    </script>
+</body>
+</html>

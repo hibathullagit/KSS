@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('images/bg-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        header h1 { margin: 0; }
+
+        main {
+            flex: 1;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            justify-items: center;
+        }
+
+        .icon {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Team logos: bigger, and keep their own shape (no circle crop) */
+        .team-logo {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            border-radius: 0;
+        }
+
+        .icon-title {
+            margin-top: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button {
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PLAYERS</h1>
+    </header>
+
+    <main>
+        <div class="icon-grid">
+            <div class="icon" onclick="window.location.href='ksk.html'">
+                <img class="team-logo" src="images/team1.png" alt="Karothingal Super Kings">
+                <div class="icon-title">Karothingal Super Kings</div>
+            </div>
+            <div class="icon" onclick="window.location.href='team2.html'">
+                <img class="team-logo" src="images/fighters-logo.png" alt="Fighters Karothingal">
+                <div class="icon-title">Fighters Karothingal</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="buttons">
+            <a href="kss.html" class="button">Home</a>
+            <a href="javascript:history.back()" class="button">Back</a>
+        </div>
+    </footer>
+</body>
+</html>

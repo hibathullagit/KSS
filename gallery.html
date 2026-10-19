@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('images/bg-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        header h1 { margin: 0; }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin: 0 0 12px;
+            font-size: 18px;
+            color: blue;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .photo-grid img,
+        .photo-grid .placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #ddd;
+            cursor: pointer;
+        }
+
+        .placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #aaa;
+            cursor: default;
+        }
+
+        .note {
+            text-align: center;
+            color: #555;
+            margin: 0 0 12px;
+        }
+
+        /* Full screen viewer */
+        #viewer {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        #viewer img {
+            max-width: 95%;
+            max-height: 80%;
+            border-radius: 8px;
+        }
+
+        #viewer .close-btn {
+            margin-top: 20px;
+            color: white;
+            font-size: 20px;
+            background: #c62828;
+            padding: 10px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button {
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button:hover { background-color: #777; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GALLERY</h1>
+    </header>
+
+    <main id="albums"></main>
+
+    <div id="viewer" onclick="closeViewer()">
+        <img id="viewerImg" src="" alt="Photo">
+        <div class="close-btn" onclick="closeViewer()">Close</div>
+    </div>
+
+    <footer>
+        <div class="buttons">
+            <a href="kss.html" class="button">Home</a>
+            <a href="javascript:history.back()" class="button">Back</a>
+        </div>
+    </footer>
+
+    <script>
+        // ===== EDIT ALBUMS HERE =====
+        // Put your photos in the folder images/gallery/ and list them below.
+        // Example (remove the // to try it):
+        // { title: "Match 1", photos: ["images/gallery/m1-1.jpg", "images/gallery/m1-2.jpg"] },
+        var ALBUMS = [
+        ];
+        // ============================
+
+        var box = document.getElementById("albums");
+
+        if (ALBUMS.length === 0) {
+            var html = '<div class="card"><p class="note">Photos coming soon.</p><div class="photo-grid">';
+            for (var i = 0; i < 6; i++) html += '<div class="placeholder">&#128247;</div>';
+            box.innerHTML = html + '</div></div>';
+        }
+
+        ALBUMS.forEach(function (album) {
+            var card = document.createElement("div");
+            card.className = "card";
+            var title = document.createElement("h2");
+            title.textContent = album.title;
+            var grid = document.createElement("div");
+            grid.className = "photo-grid";
+
+            album.photos.forEach(function (src) {
+                var img = document.createElement("img");
+                img.src = src;
+                img.alt = album.title;
+                img.onclick = function () { openViewer(src); };
+                grid.appendChild(img);
+            });
+
+            card.appendChild(title);
+            card.appendChild(grid);
+            box.appendChild(card);
+        });
+
+        function openViewer(src) {
+            document.getElementById("viewerImg").src = src;
+            document.getElementById("viewer").style.display = "flex";
+        }
+
+        function closeViewer() {
+            document.getElementById("viewer").style.display = "none";
+        }
+    </script>
+</body>
+</html>

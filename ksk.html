@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAROTHINGAL SUPER KINGS</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            background-image: url('images/bg-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 20px 0 40px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            justify-items: center;
+            margin-top: 30px;
+        }
+
+        .icon {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: transform 0.2s;
+            text-align: center;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        .icon img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .icon-title {
+            margin-top: 10px;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Pop-up styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            text-align: left;
+        }
+
+        .popup img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 18px;
+            color: red;
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .stats {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        footer {
+            text-align: center;
+            padding: 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button {
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/ksk-logo.png" alt="KSK Logo" class="logo" style="height: 100px; width: 100px;">
+        <h1>KAROTHINGAL SUPER KINGS</h1>
+    </header>
+
+    <main>
+        <div class="icon-grid">
+            <div class="icon" onclick="openPopup('player1')">
+                <img src="images/player1.png" alt="AJMAL">
+                <div class="icon-title">AJMAL</div>
+            </div>
+            <div class="icon" onclick="openPopup('player2')">
+                <img src="images/player2.png" alt="MIDLAJ">
+                <div class="icon-title">MIDLAJ</div>
+            </div>
+            <div class="icon" onclick="openPopup('player3')">
+                <img src="images/player3.png" alt="HASBULLA">
+                <div class="icon-title">HASBULLA</div>
+            </div>
+            <div class="icon" onclick="openPopup('player4')">
+                <img src="images/player4.png" alt="SHALU">
+                <div class="icon-title">SHALU</div>
+            </div>
+            <div class="icon" onclick="openPopup('player5')">
+                <img src="images/player5.png" alt="SADIQ">
+                <div class="icon-title">SADIQ</div>
+            </div>
+        </div>
+
+        <!-- Overlay -->
+        <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+        <!-- Player Pop-ups (numbers fill in from data.js) -->
+        <div class="popup" id="player1">
+            <img src="images/player1.png" alt="AJMAL" style="width: 100px; height: 100px;">
+            <h2>AJMAL</h2>
+            <div class="stats">
+                <div class="stat"><span>Runs:</span><span>0</span></div>
+                <div class="stat"><span>Wickets:</span><span>0</span></div>
+                <div class="stat"><span>Batting ranking:</span><span>-</span></div>
+                <div class="stat"><span>Bowling ranking:</span><span>-</span></div>
+            </div>
+            <span class="close-btn" onclick="closePopup()">Close</span>
+        </div>
+        <div class="popup" id="player2">
+            <img src="images/player2.png" alt="MIDLAJ" style="width: 100px; height: 100px;">
+            <h2>MIDLAJ</h2>
+            <div class="stats">
+                <div class="stat"><span>Runs:</span><span>0</span></div>
+                <div class="stat"><span>Wickets:</span><span>0</span></div>
+                <div class="stat"><span>Batting ranking:</span><span>-</span></div>
+                <div class="stat"><span>Bowling ranking:</span><span>-</span></div>
+            </div>
+            <span class="close-btn" onclick="closePopup()">Close</span>
+        </div>
+        <div class="popup" id="player3">
+            <img src="images/player3.png" alt="HASBULLA" style="width: 100px; height: 100px;">
+            <h2>HASBULLA</h2>
+            <div class="stats">
+                <div class="stat"><span>Runs:</span><span>0</span></div>
+                <div class="stat"><span>Wickets:</span><span>0</span></div>
+                <div class="stat"><span>Batting ranking:</span><span>-</span></div>
+                <div class="stat"><span>Bowling ranking:</span><span>-</span></div>
+            </div>
+            <span class="close-btn" onclick="closePopup()">Close</span>
+        </div>
+        <div class="popup" id="player4">
+            <img src="images/player4.png" alt="SHALU" style="width: 100px; height: 100px;">
+            <h2>SHALU</h2>
+            <div class="stats">
+                <div class="stat"><span>Runs:</span><span>0</span></div>
+                <div class="stat"><span>Wickets:</span><span>0</span></div>
+                <div class="stat"><span>Batting ranking:</span><span>-</span></div>
+                <div class="stat"><span>Bowling ranking:</span><span>-</span></div>
+            </div>
+            <span class="close-btn" onclick="closePopup()">Close</span>
+        </div>
+        <div class="popup" id="player5">
+            <img src="images/player5.png" alt="SADIQ" style="width: 100px; height: 100px;">
+            <h2>SADIQ</h2>
+            <div class="stats">
+                <div class="stat"><span>Runs:</span><span>0</span></div>
+                <div class="stat"><span>Wickets:</span><span>0</span></div>
+                <div class="stat"><span>Batting ranking:</span><span>-</span></div>
+                <div class="stat"><span>Bowling ranking:</span><span>-</span></div>
+            </div>
+            <span class="close-btn" onclick="closePopup()">Close</span>
+        </div>
+    </main>
+
+    <footer>
+        <div class="buttons">
+            <a href="kss.html" class="button">Home</a>
+            <a href="javascript:history.back()" class="button">Back</a>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        function openPopup(playerId) {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById(playerId).style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            const popups = document.querySelectorAll('.popup');
+            popups.forEach(popup => {
+                popup.style.display = 'none';
+            });
+        }
+
+        // ---------- Player stats from data.js ----------
+        // Adds up runs and wickets for every player across all matches.
+        function playerTotals() {
+            var t = {};
+            MATCHES.forEach(function (m) {
+                [m.a, m.b].forEach(function (side) {
+                    (side.players || []).forEach(function (p) {
+                        var key = p.name.trim().toUpperCase();
+                        if (!t[key]) t[key] = { runs: 0, wkts: 0 };
+                        t[key].runs += p.runs;
+                        t[key].wkts += p.wickets;
+                    });
+                });
+            });
+            return t;
+        }
+
+        // Rank = 1 + number of players with a higher total (ties share a rank)
+        function rankOf(totals, key, value) {
+            var higher = 0;
+            Object.keys(totals).forEach(function (k) {
+                if (totals[k][key] > value) higher++;
+            });
+            return higher + 1;
+        }
+
+        function fillPlayerPopups() {
+            var totals = playerTotals();
+            document.querySelectorAll('.popup').forEach(function (pop) {
+                var h = pop.querySelector('h2');
+                if (!h) return;
+                var key = h.textContent.trim().toUpperCase();
+                var t = totals[key] || { runs: 0, wkts: 0 };
+                var vals = pop.querySelectorAll('.stat span:last-child');
+                if (vals.length < 4) return;
+                vals[0].textContent = t.runs;
+                vals[1].textContent = t.wkts;
+                vals[2].textContent = t.runs > 0 ? rankOf(totals, 'runs', t.runs) : '-';
+                vals[3].textContent = t.wkts > 0 ? rankOf(totals, 'wkts', t.wkts) : '-';
+            });
+        }
+
+        fillPlayerPopups();
+    </script>
+</body>
+</html>

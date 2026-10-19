@@ -85,5 +85,5 @@ var PHOTOS = {
 // ----- GALLERY ALBUMS (photos inside KSS/images/gallery) -----
 // One line per album. Remove the // to use an example.
 var ALBUMS = [
-     { title: "", photos: ["gallery/kss1.jpg", "gallery/kss1.jpg"] },
+     { title: "match 1", photos: ["gallery/kss1.jpg", "gallery/kss1.jpg"] },
 ];

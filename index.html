@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karothingal Super Series</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #f7f7f7;
+            overflow: hidden;
+        }
+
+        #splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f7f7f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+        }
+
+        #splash img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #splash.fade {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="splash" onclick="goHome()">
+        <img src="images/kss-logo.png" alt="Karothingal Super Series Logo">
+    </div>
+
+    <script>
+        // ===== SPLASH TIMING (seconds) =====
+        var SPLASH_SECONDS = 3;
+        // ===================================
+
+        var leaving = false;
+
+        // Fades out, then opens the home page. location.replace means
+        // the Back button won't return to this splash.
+        function goHome() {
+            if (leaving) return;
+            leaving = true;
+            document.getElementById("splash").classList.add("fade");
+            setTimeout(function () {
+                location.replace("kss.html");
+            }, 500);
+        }
+
+        setTimeout(goHome, SPLASH_SECONDS * 1000);
+    </script>
+</body>
+</html>
